@@ -1,8 +1,5 @@
 function initTimerCount() {
   const timer = document.querySelector(".relogio");
-  const init = document.querySelector(".iniciar");
-  const pause = document.querySelector(".pausar");
-  const restart = document.querySelector(".zerar");
   let seconds = 0;
   let count;
 
@@ -21,22 +18,26 @@ function initTimerCount() {
     }, 1000);
   }
 
-  init.addEventListener("click", function (event) {
-    clearInterval(count);
-    initTimer();
-    timer.classList.remove("pausado");
-  });
+  document.addEventListener("click", function (e) {
+    const element = e.target;
 
-  pause.addEventListener("click", function (event) {
-    clearInterval(count);
-    timer.classList.add("pausado");
-  });
+    if (element.classList.contains("iniciar")) {
+      clearInterval(count);
+      initTimer();
+      timer.classList.remove("pausado");
+    }
 
-  restart.addEventListener("click", function (event) {
-    clearInterval(count);
-    timer.innerHTML = "00:00:00";
-    seconds = 0;
-    timer.classList.remove("pausado");
+    if (element.classList.contains("pausar")) {
+      clearInterval(count);
+      timer.classList.add("pausado");
+    }
+
+    if (element.classList.contains("zerar")) {
+      clearInterval(count);
+      timer.innerHTML = "00:00:00";
+      seconds = 0;
+      timer.classList.remove("pausado");
+    }
   });
 }
 
